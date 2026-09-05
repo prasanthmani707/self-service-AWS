@@ -1,0 +1,1 @@
+export function AwsConnectForm() { return <form className="space-y-3"><input name="roleArn" placeholder="IAM role ARN" className="w-full rounded border p-3" /><button className="rounded bg-[#0d766f] px-4 py-2 text-white">Connect AWS</button></form>; }

@@ -1,0 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+:root { --font-space: 'Space Grotesk'; --font-sans: 'DM Sans'; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #f4f7f5; color: #173b42; font-family: 'DM Sans', sans-serif; }

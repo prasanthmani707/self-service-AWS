@@ -1,0 +1,1 @@
+export function EnvironmentSelector() { return <select name="environment" defaultValue="cluster" className="w-full rounded border border-[#cadbd4] p-3"><option value="cluster">Splunk Cluster</option><option value="standalone">Splunk Standalone</option></select>; }

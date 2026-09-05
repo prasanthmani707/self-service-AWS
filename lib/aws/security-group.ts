@@ -1,0 +1,2 @@
+import { DescribeSecurityGroupsCommand, type EC2Client } from "@aws-sdk/client-ec2";
+export async function findPlatformSecurityGroup(ec2: EC2Client, vpcId: string) { const result = await ec2.send(new DescribeSecurityGroupsCommand({ Filters: [{ Name: "vpc-id", Values: [vpcId] }, { Name: "group-name", Values: ["default"] }] })); const group = result.SecurityGroups?.[0]; if (!group?.GroupId) throw new Error("No usable security group was found for this VPC."); return group.GroupId; }

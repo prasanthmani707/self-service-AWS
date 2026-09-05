@@ -1,0 +1,1 @@
+export function AwsResourceList({ resources }: { resources: string[] }) { return <ul className="space-y-2">{resources.map((resource) => <li key={resource} className="rounded border p-3 text-sm">{resource}</li>)}</ul>; }

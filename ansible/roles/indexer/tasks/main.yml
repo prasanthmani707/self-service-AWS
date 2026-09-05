@@ -1,0 +1,4 @@
+---
+- name: Configure indexer role
+  ansible.builtin.debug:
+    msg: "Configure indexer service"

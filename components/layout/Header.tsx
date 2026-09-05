@@ -1,0 +1,1 @@
+export function Header({ title }: { title: string }) { return <header className="flex items-center justify-between border-b border-[#d8e5df] bg-white px-6 py-4"><span className="text-sm text-[#71837c]">Workspace / {title}</span><span className="text-xs text-[#438276]">AWS us-east-1</span></header>; }

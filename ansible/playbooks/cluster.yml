@@ -1,0 +1,15 @@
+- name: Configure Splunk cluster
+  hosts: all
+  become: true
+  roles:
+    - common
+    - splunk
+
+- name: Configure Splunk role services
+  hosts: all
+  become: true
+  roles:
+    - indexer
+    - search-head
+    - cluster-manager
+    - deployment-server

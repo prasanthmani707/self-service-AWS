@@ -1,0 +1,4 @@
+---
+- name: Install and configure Splunk
+  ansible.builtin.debug:
+    msg: "Install Splunk package and apply role-specific configuration"

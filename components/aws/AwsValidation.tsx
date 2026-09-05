@@ -1,0 +1,1 @@
+export function AwsValidation({ valid }: { valid: boolean }) { return <p className={valid ? "text-[#38836c]" : "text-[#b95548]"}>{valid ? "AWS role and permissions verified." : "AWS validation failed."}</p>; }

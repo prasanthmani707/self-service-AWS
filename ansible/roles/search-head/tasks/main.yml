@@ -1,0 +1,4 @@
+---
+- name: Configure search head role
+  ansible.builtin.debug:
+    msg: "Configure search head service"

@@ -1,0 +1,6 @@
+- name: Configure Splunk standalone
+  hosts: all
+  become: true
+  roles:
+    - common
+    - splunk

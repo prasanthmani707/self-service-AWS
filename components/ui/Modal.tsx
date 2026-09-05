@@ -1,0 +1,1 @@
+export function Modal({ children }: { children: React.ReactNode }) { return <div className="fixed inset-0 z-10 grid place-items-center bg-[#173b42]/50 p-6"><div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">{children}</div></div>; }

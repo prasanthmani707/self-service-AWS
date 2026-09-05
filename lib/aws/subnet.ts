@@ -1,0 +1,3 @@
+import { DescribeSubnetsCommand, type EC2Client } from "@aws-sdk/client-ec2";
+export async function findAvailableSubnet(ec2: EC2Client, vpcId: string) { const result = await ec2.send(new DescribeSubnetsCommand({ Filters: [{ Name: "vpc-id", Values: [vpcId] }, { Name: "state", Values: ["available"] }] })); const subnet = result.Subnets?.sort((a, b) => (b.AvailableIpAddressCount ?? 0) - (a.AvailableIpAddressCount ?? 0))[0]; if (!subnet?.SubnetId || !subnet.AvailabilityZone) throw new Error("No suitable subnet was found in the selected region."); return { subnetId: subnet.SubnetId, availabilityZone: subnet.AvailabilityZone };
+}

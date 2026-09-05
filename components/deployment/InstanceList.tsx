@@ -1,0 +1,2 @@
+import type { DeploymentInstance } from "@/types/deployment";
+export function InstanceList({ instances }: { instances: DeploymentInstance[] }) { return <ul className="divide-y divide-[#edf2ef]">{instances.map((instance) => <li className="flex justify-between py-3 text-sm" key={instance.instanceId}><span>{instance.name} <small className="text-[#71837c]">({instance.role})</small></span><span className="text-[#38836c]">{instance.state}</span></li>)}</ul>; }

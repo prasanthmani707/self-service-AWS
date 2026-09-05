@@ -1,0 +1,3 @@
+import { spawn } from "node:child_process";
+import type { EnvironmentKey } from "@/types/deployment";
+export function runPlaybook(environment: EnvironmentKey, inventoryPath: string): Promise<void> { const playbook = environment === "cluster" ? "ansible/playbooks/cluster.yml" : "ansible/playbooks/standalone.yml"; return new Promise((resolve, reject) => { const child = spawn(globalThis.process.env.ANSIBLE_BIN ?? "ansible-playbook", [playbook, "-i", inventoryPath], { stdio: "ignore" }); child.once("error", reject); child.once("exit", (code: number | null) => code === 0 ? resolve() : reject(new Error(`Ansible exited with code ${code ?? "unknown"}.`))); }); }

@@ -1,0 +1,4 @@
+---
+- name: Configure cluster manager role
+  ansible.builtin.debug:
+    msg: "Configure cluster manager service"
