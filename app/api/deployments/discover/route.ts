@@ -12,10 +12,12 @@ export async function POST(request: Request) {
     const identity = await getAwsIdentity(connection.region, credentials);
     const { ec2 } = createAwsClients(connection.region, credentials);
     const instances = await discoverPlatformInstances(ec2);
+    const requestedDeploymentId = typeof (body as { deploymentId?: unknown }).deploymentId === "string" ? (body as { deploymentId: string }).deploymentId : undefined;
     const grouped = new Map<string, ReturnType<typeof mapInstance>[]>();
     for (const instance of instances) {
       const deploymentId = instance.Tags?.find((tag) => tag.Key === "DeploymentId")?.Value;
       if (!deploymentId) continue;
+      if (requestedDeploymentId && deploymentId !== requestedDeploymentId) continue;
       const group = grouped.get(deploymentId) ?? [];
       group.push(mapInstance(instance));
       grouped.set(deploymentId, group);
