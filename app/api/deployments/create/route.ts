@@ -17,7 +17,14 @@ export async function POST(request: Request) {
 		if (!parsed.success) return NextResponse.json({ error: "Invalid deployment request.", details: parsed.error.flatten() }, { status: 400 });
 		const input = parsed.data;
 		requestedEnvironment = input.environment;
-		const connection = { roleArn: input.roleArn, externalId: input.externalId?.trim() || undefined, region: input.region };
+		const connection = {
+			roleArn: input.roleArn,
+			externalId: input.externalId?.trim() || undefined,
+			region: input.region,
+			accessKeyId: input.accessKeyId,
+			secretAccessKey: input.secretAccessKey,
+			sessionToken: input.sessionToken,
+		};
 		const credentials = await assumePlatformRole(connection);
 		const identity = await getAwsIdentity(input.region, credentials);
 		const { ec2 } = createAwsClients(input.region, credentials);

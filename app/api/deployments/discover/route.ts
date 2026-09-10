@@ -6,8 +6,22 @@ import { requireRoleConnection } from "@/lib/auth/auth";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json() as { roleArn?: unknown; externalId?: unknown; region?: unknown };
-    const connection = requireRoleConnection({ roleArn: body.roleArn, externalId: typeof body.externalId === "string" ? body.externalId.trim() || undefined : undefined, region: body.region });
+    const body = await request.json() as {
+      roleArn?: unknown;
+      externalId?: unknown;
+      region?: unknown;
+      accessKeyId?: unknown;
+      secretAccessKey?: unknown;
+      sessionToken?: unknown;
+    };
+    const connection = requireRoleConnection({
+      roleArn: body.roleArn,
+      externalId: typeof body.externalId === "string" ? body.externalId.trim() || undefined : undefined,
+      region: body.region,
+      accessKeyId: body.accessKeyId,
+      secretAccessKey: body.secretAccessKey,
+      sessionToken: typeof body.sessionToken === "string" ? body.sessionToken.trim() || undefined : undefined,
+    });
     const credentials = await assumePlatformRole(connection);
     const identity = await getAwsIdentity(connection.region, credentials);
     const { ec2 } = createAwsClients(connection.region, credentials);
