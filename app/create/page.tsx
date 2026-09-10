@@ -31,7 +31,7 @@ export default function CreatePage() {
   }
 
   function rememberConnection(values: Record<string, FormDataEntryValue>) {
-    localStorage.setItem("fieldline.roleArn", String(values.roleArn));
+    localStorage.setItem("fieldline.roleArn", String(values.roleArn ?? ""));
     localStorage.setItem("fieldline.externalId", String(values.externalId ?? ""));
     localStorage.setItem("fieldline.region", String(values.region));
     localStorage.setItem("fieldline.keyName", String(values.keyName));
