@@ -12,15 +12,29 @@ export default function CreatePage() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
+    const applyField = (name: string, value: string | null) => {
+      if (!value) return;
+      const field = document.querySelector(`[name="${name}"]`) as HTMLInputElement | HTMLSelectElement | null;
+      if (field) field.value = value;
+    };
+
+    const accessKeyId = localStorage.getItem("fieldline.accessKeyId");
+    const secretAccessKey = localStorage.getItem("fieldline.secretAccessKey");
+    const sessionToken = localStorage.getItem("fieldline.sessionToken");
     const roleArn = localStorage.getItem("fieldline.roleArn");
     const externalId = localStorage.getItem("fieldline.externalId");
     const region = localStorage.getItem("fieldline.region");
     const keyName = localStorage.getItem("fieldline.keyName");
-    if (roleArn) (document.querySelector('[name="roleArn"]') as HTMLInputElement).value = roleArn;
-    if (externalId) (document.querySelector('[name="externalId"]') as HTMLInputElement).value = externalId;
-    if (region) (document.querySelector('[name="region"]') as HTMLSelectElement).value = region;
-    if (keyName) (document.querySelector('[name="keyName"]') as HTMLInputElement).value = keyName;
-    setSaved(Boolean(roleArn));
+
+    applyField("accessKeyId", accessKeyId);
+    applyField("secretAccessKey", secretAccessKey);
+    applyField("sessionToken", sessionToken);
+    applyField("roleArn", roleArn);
+    applyField("externalId", externalId);
+    applyField("region", region);
+    applyField("keyName", keyName);
+
+    setSaved(Boolean(accessKeyId || secretAccessKey || sessionToken || roleArn || externalId || region || keyName));
   }, []);
 
   function valuesFromForm(form: HTMLFormElement) {
